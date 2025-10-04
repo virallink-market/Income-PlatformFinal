@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+্/** @type {import('next').NextConfig} */
 const nextConfig = {
   // Use swcMinify and modern JavaScript features
   swcMinify: true,
