@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext'; 
+import { useAuth } from './AuthContext'; 
 import { getAuth, signOut } from 'firebase/auth';
 import { app } from '../../firebaseConfig'; // সঠিক পাথ
 
