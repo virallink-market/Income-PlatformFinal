@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import { AuthProvider } from '../context/AuthContext'; 
+import './globals.css'; // <-- এখানে পাথ ঠিক করা হয়েছে
+import { AuthProvider } from './AuthContext'; // <-- এখানে পাথ ঠিক করা হয়েছে
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Income Platform',
-  description: 'Track your income easily',
+  description: 'Track your income easily.',
 };
 
 export default function RootLayout({
