@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Fix for 'Module parse failed: Unexpected token' error with undici/fetch
-  transpilePackages: ['undici'],
+  // Use swcMinify and modern JavaScript features
+  swcMinify: true,
+  // Fix the Module parse failed error by ensuring the problematic package is compiled
+  experimental: {
+    serverComponentsExternalPackages: ['undici'],
+  },
 };
 
 module.exports = nextConfig;
