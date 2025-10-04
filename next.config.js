@@ -1,11 +1,6 @@
-্/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Use swcMinify and modern JavaScript features
-  swcMinify: true,
-  // Fix the Module parse failed error by ensuring the problematic package is compiled
-  experimental: {
-    serverComponentsExternalPackages: ['undici'],
-  },
+  // এখানে অতিরিক্ত কোনো কনফিগারেশন নেই, যা সিনট্যাক্স ভুলের ঝুঁকি কমাবে
 };
 
 module.exports = nextConfig;
