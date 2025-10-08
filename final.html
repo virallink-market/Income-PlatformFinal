@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্টেপ ৩ / ৩ (ফাইনাল)</title>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #ffebeb; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; text-align: center; }
+        .step-box { background-color: #fff; padding: 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(220, 53, 69, 0.2); max-width: 500px; width: 90%; border: 2px solid #dc3545; }
+        h1 { color: #dc3545; margin-bottom: 20px; font-size: 2.4em; text-transform: uppercase; }
+        p { font-size: 1.2em; margin-bottom: 35px; color: #555; font-style: italic; }
+        #timer { font-size: 3.5em; font-weight: 900; color: #212529; margin-bottom: 40px; display: block; }
+        .ad-area { background-color: #f7e6e8; height: 140px; display: flex; justify-content: center; align-items: center; border: 2px dashed #dc3545; margin-bottom: 35px; font-size: 1.1em; color: #6c757d; }
+        .final-button { background-color: #dc3545; color: white; padding: 18px 40px; border: none; border-radius: 10px; cursor: pointer; font-size: 1.4em; font-weight: bold; transition: background-color 0.3s; text-decoration: none; display: inline-block; opacity: 0.5; pointer-events: none; }
+        .final-button:hover { background-color: #c82333; }
+        .active { opacity: 1; pointer-events: auto; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); } 100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); } }
+    </style>
+</head>
+<body>
+
+    <div class="step-box">
+        <h1>ভিডিও লিংক প্রস্তুত!</h1>
+        
+        <div class="ad-area">
+            এড নেটওয়ার্ক কোড (৩)
+        </div>
+        <p>আপনার কাঙ্ক্ষিত লিংকে প্রবেশ করতে আর মাত্র:</p>
+        <span id="timer">10</span>
+        
+        <a href="#" id="final-link-button" class="final-button" target="_blank">ভিডিও লিংকটি খুলুন</a>
+    </div>
+
+    <script>
+        const STEP_TIME = 10; 
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encodedLink = urlParams.get('link');
+            const finalButton = document.getElementById('final-link-button');
+            const timerDisplay = document.getElementById('timer');
+            let timeLeft = STEP_TIME;
+
+            if (!encodedLink) {
+                document.querySelector('.step-box').innerHTML = '<h1>ত্রুটি!</h1><p>ভিডিও লিংকটি পাওয়া যায়নি।</p>';
+                return;
+            }
+            
+            try {
+                // Base64 ডিকোড করে আসল ভিডিও লিংকটি বের করা
+                const finalVideoLink = atob(encodedLink);
+                
+                // ফাইনাল বাটনে লিংক সেট করা হবে টাইমার শেষে
+                finalButton.href = finalVideoLink; 
+            } catch (e) {
+                document.querySelector('.step-box').innerHTML = '<h1>ত্রুটি!</h1><p>লিংক ডিকোডিংয়ে সমস্যা হয়েছে।</p>';
+                return;
+            }
+
+            // টাইমার ফাংশন
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timerDisplay.textContent = "GO!";
+                    
+                    // বাটন সক্রিয় করা
+                    finalButton.classList.add('active');
+                    finalButton.textContent = 'ভিডিও লিংকটি খুলুন';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
