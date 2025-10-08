@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভিডিও লিংক জেনারেটর (এডমিন)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; color: #333; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+        h2 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 25px; font-weight: 600; }
+        input[type="url"] { width: 100%; padding: 15px; margin-bottom: 20px; border: 2px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+        input[type="url"]:focus { border-color: #007bff; outline: none; }
+        button { background-color: #28a745; color: white; padding: 14px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; font-weight: bold; transition: background-color 0.3s, transform 0.1s; display: block; width: 100%; }
+        button:hover { background-color: #218838; transform: translateY(-1px); }
+        .output-box { margin-top: 30px; background-color: #e9f0f7; border-left: 6px solid #007bff; padding: 20px; border-radius: 6px; }
+        .output-code { background-color: #f8f9fa; color: #c82365; font-family: monospace; font-size: 1.1em; padding: 10px; border-radius: 4px; white-space: normal; overflow-wrap: break-word; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>ভিডিও লিংক জেনারেটর প্যানেল</h2>
+        <p>আপনার **চূড়ান্ত ভিডিও লিংকটি** এখানে পেস্ট করুন। তৈরি হওয়া লিংকটি পাবলিকে শেয়ার করবেন।</p>
+        
+        <input type="url" id="videoLinkInput" placeholder="https://youtube.com/your-video-link" required>
+        
+        <button onclick="generateLink()">শেয়ার করার লিংক তৈরি করুন</button>
+        
+        <div class="output-box">
+            <p><strong>ফাইনাল শেয়ার করার লিংক:</strong></p>
+            <span class="output-code" id="outputArea">লিংকটি এখানে জেনারেট হবে।</span>
+        </div>
+    </div>
+
+    <script>
+        // *** অতি গুরুত্বপূর্ণ: আপনার GitHub Pages এর আসল URL দিয়ে এটি পরিবর্তন করুন। ***
+        // উদাহরণ: https://yourusername.github.io/repository-name/step1.html
+        const BASE_URL = "https://YOUR_USERNAME.github.io/YOUR_REPO/step1.html";
+
+        function generateLink() {
+            const originalLink = document.getElementById('videoLinkInput').value.trim();
+            const outputArea = document.getElementById('outputArea');
+
+            if (!originalLink) {
+                outputArea.textContent = "দয়া করে একটি বৈধ লিংক ইনপুট করুন।";
+                return;
+            }
+
+            try {
+                // 1. Base64 এনকোডিং
+                const encodedLink = btoa(originalLink);
+                
+                // 2. স্টেপ 1 এর সাথে যুক্ত করে চূড়ান্ত লিংক তৈরি
+                const finalShareableLink = BASE_URL + "?link=" + encodedLink;
+
+                // 3. আউটপুট বক্সে লিংকটি প্রদর্শন
+                outputArea.textContent = finalShareableLink;
+                console.log("Generated Link:", finalShareableLink);
+            } catch (e) {
+                outputArea.textContent = "এনকোডিংয়ে সমস্যা হয়েছে। লিংকটি সঠিক কিনা যাচাই করুন।";
+            }
+        }
+    </script>
+</body>
+</html>
